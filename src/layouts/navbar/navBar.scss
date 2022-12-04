@@ -1,0 +1,22 @@
+.nav-container{
+    position: sticky;
+    height: 3rem;
+    top:0;
+    width: 100vw;
+    background-color: #696969;
+    color: white;
+    display: flex;
+}
+
+.user-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    padding-right: 1rem;
+    text-align: right;
+}
+
+.hamburger-icon{
+    
+}
