@@ -10,18 +10,17 @@ jobs:
   create-envfile:
     runs-on: ubuntu-latest
     steps:
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.2
-        with:
-          envkey_VITE_APP_FIREBASE_MEASUREMENT_ID: ${{ secrets.ENVKEY_VITE_APP_FIREBASE_MEASUREMENT_ID }}
-          envkey_VITE_APP_FIREBASE_PROJECT_ID: ${{ secrets.ENVKEY_VITE_APP_FIREBASE_PROJECT_ID }}
-          envkey_VITE_APP_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.ENVKEY_VITE_APP_FIREBASE_MESSAGING_SENDER_ID }}
-          envkey_VITE_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.ENVKEY_VITE_APP_FIREBASE_STORAGE_BUCKET }}
-          envkey_VITE_APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.ENVKEY_VITE_APP_FIREBASE_AUTH_DOMAIN }}
-          envkey_VITE_APP_FIREBASE_API_KEY: ${{ secrets.ENVKEY_VITE_APP_FIREBASE_API_KEY }}
-          envkey_VITE_APP_FIREBASE_FIREBASE_APP_ID: ${{ secrets.ENVKEY_VITE_APP_FIREBASE_FIREBASE_APP_ID }}
-          file_name: .env
-          fail_on_empty: false
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo VITE_APP_FIREBASE_MEASUREMENT_ID=${{ secrets.ENVKEY_VITE_APP_FIREBASE_MEASUREMENT_ID }} >> .env
+          echo VITE_APP_FIREBASE_PROJECT_ID=${{ secrets.ENVKEY_VITE_APP_FIREBASE_PROJECT_ID }} >> .env
+          echo VITE_APP_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.ENVKEY_VITE_APP_FIREBASE_MESSAGING_SENDER_ID }} >> .env
+          echo VITE_APP_FIREBASE_STORAGE_BUCKET=${{ secrets.ENVKEY_VITE_APP_FIREBASE_STORAGE_BUCKET }} >> .env
+          echo VITE_APP_FIREBASE_AUTH_DOMAIN=${{ secrets.ENVKEY_VITE_APP_FIREBASE_AUTH_DOMAIN }} >> .env
+          echo VITE_APP_FIREBASE_API_KEY=${{ secrets.ENVKEY_VITE_APP_FIREBASE_API_KEY }} >> .env
+          echo VITE_APP_FIREBASE_FIREBASE_APP_ID=${{ secrets.ENVKEY_VITE_APP_FIREBASE_FIREBASE_APP_ID }} >> .env
+          cat .env
 
   build_and_deploy:
     runs-on: ubuntu-latest
