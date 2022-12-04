@@ -22,12 +22,16 @@ const Home = () => {
   }
 
   const getModule = () => {
-    console.log('selectedModule', selectedModule)
     switch (selectedModule) {
       case Modules.HRMS:
         return <HRMS />
+      case Modules.Attendance:
+      case Modules.Booking:
+      case Modules.Inventory:
+      case Modules.Payroll:
+      case Modules.Reports:
       default:
-        return <div>Hello</div>
+        return <div>Module Under development..!</div>
     }
   }
   return (
