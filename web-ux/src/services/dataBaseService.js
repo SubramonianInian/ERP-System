@@ -4,7 +4,8 @@ import {
   collection,
   getDoc,
   getDocs,
-  deleteDoc
+  deleteDoc,
+  updateDoc
 } from 'firebase/firestore'
 import { db } from '../firebase'
 
@@ -22,7 +23,6 @@ class DatabaseService {
   collectionRef
   // The class constructor.
   constructor(document) {
-    console.log(document)
     this.document = document
     this.collectionRef = collection(db, document)
     this.documentRef = doc(collection(db, document))
@@ -66,13 +66,19 @@ class DatabaseService {
   }
 
   // update an existing document with new data
-  //   update = async (id, values) => {
-  //     return await this.documentRef.doc(id).update(values)
-  //   }
+  update = async (id, payload) => {
+    const docRef = doc(db, this.document, id)
+    updateDoc(docRef, payload)
+      .then(() => {
+        console.log('Entire Document has been updated successfully.')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   //   delete an existing document from the documentRef
   remove = async (id) => {
-    console.log(this.document, id)
     const docRef = doc(db, this.document, id)
     deleteDoc(docRef)
       .then(() => {
