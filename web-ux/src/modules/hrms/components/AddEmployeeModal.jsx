@@ -30,6 +30,8 @@ const ShowAddEmployeeModal = ({ employeeInfo }) => {
   useEffect(() => {
     if (isEdit) {
       fields.forEach((field) => setValue(field, employeeInfo[field]))
+    } else {
+      fields.forEach((field) => setValue(field, ''))
     }
   }, [employeeInfo])
 
