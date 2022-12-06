@@ -5,7 +5,10 @@ import ShowAddEmployeeModal from './components/AddEmployeeModal'
 
 const HRMS = () => {
   const [employees, setEmployees] = useState([])
-  const [showAddEmployeeModal, setShowAddEmployeeModal] = useState(false)
+  const [showAddEmployeeModal, setShowAddEmployeeModal] = useState({
+    showModal: false,
+    employeeInfo: {}
+  })
   useEffect(() => {
     getAllEmployees()
   }, [employees])
@@ -26,7 +29,14 @@ const HRMS = () => {
   ]
   return (
     <div>
-      <button onClick={() => setShowAddEmployeeModal(true)}>
+      <button
+        onClick={() =>
+          setShowAddEmployeeModal({
+            showModal: true,
+            employeeInfo: undefined
+          })
+        }
+      >
         Add Employee
       </button>
       <table>
@@ -43,20 +53,32 @@ const HRMS = () => {
               <td>{employee.lastName}</td>
               <td>{employee.dob}</td>
               <td>{employee.address}</td>
-              <td>{employee.email}</td>dl
+              <td>{employee.email}</td>
               <td>{employee.dateOfJoining}</td>
               <td>{employee.designation}</td>
               <td>
                 <button onClick={() => EmployeeService.remove(employee.id)}>
                   delete
                 </button>
+                <button
+                  onClick={() =>
+                    setShowAddEmployeeModal({
+                      showModal: true,
+                      employeeInfo: employee
+                    })
+                  }
+                >
+                  Edit
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <RenderIf isVisible={showAddEmployeeModal}>
-        <ShowAddEmployeeModal />
+      <RenderIf isVisible={showAddEmployeeModal.showModal}>
+        <ShowAddEmployeeModal
+          employeeInfo={showAddEmployeeModal.employeeInfo}
+        />
       </RenderIf>
     </div>
   )
